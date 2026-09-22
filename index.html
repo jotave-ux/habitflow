@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HabitFlow — acompanhe seus hábitos crescerem</title>
+  <meta name="description" content="HabitFlow é um painel kanban para criar, acompanhar e manter hábitos diários, com os dados salvos direto no navegador.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <header class="app-header">
+      <div class="brand">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 21C12 21 5 17.5 5 11C5 6.5 8.5 4 12 4C15.5 4 19 6.5 19 11C19 17.5 12 21 12 21Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M12 21V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 12C12 12 9 12 9 9C9 9 12 9 12 12Z" fill="currentColor"/>
+        </svg>
+        <div>
+          <h1>HabitFlow</h1>
+          <p class="today" id="todayLabel">carregando data…</p>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="openAddBtn" type="button">Adicionar hábito</button>
+    </header>
+
+    <section class="stats" aria-label="Resumo do dia">
+      <div class="stat">
+        <span class="stat-value" id="statTotal">0</span>
+        <span class="stat-label">hábitos cadastrados</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="statDone">0</span>
+        <span class="stat-label">florescidos hoje</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="statStreak">0</span>
+        <span class="stat-label">maior sequência</span>
+      </div>
+      <button class="btn btn-ghost" id="newDayBtn" type="button">Começar novo dia</button>
+    </section>
+
+    <main class="board">
+
+      <section class="column" data-stage="seed">
+        <header class="column-header">
+          <h2>Semente</h2>
+          <span class="column-sub">a fazer</span>
+          <span class="column-count" id="countSeed">0</span>
+        </header>
+        <div class="card-list" id="listSeed" data-dropzone="seed"></div>
+      </section>
+
+      <section class="column" data-stage="sprout">
+        <header class="column-header">
+          <h2>Brotando</h2>
+          <span class="column-sub">em andamento</span>
+          <span class="column-count" id="countSprout">0</span>
+        </header>
+        <div class="card-list" id="listSprout" data-dropzone="sprout"></div>
+      </section>
+
+      <section class="column" data-stage="bloom">
+        <header class="column-header">
+          <h2>Florescendo</h2>
+          <span class="column-sub">concluído hoje</span>
+          <span class="column-count" id="countBloom">0</span>
+        </header>
+        <div class="card-list" id="listBloom" data-dropzone="bloom"></div>
+      </section>
+
+    </main>
+
+    <footer class="app-footer">
+      <p>Os dados ficam salvos apenas neste navegador, via <code>localStorage</code>. Nada é enviado para nenhum servidor.</p>
+    </footer>
+
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <form class="modal" id="habitForm" novalidate>
+      <h2>Novo hábito</h2>
+
+      <label class="field">
+        <span>Nome do hábito</span>
+        <input type="text" id="habitName" maxlength="40" placeholder="Ex.: Ler 10 páginas" required>
+      </label>
+
+      <label class="field">
+        <span>Categoria</span>
+        <select id="habitCategory">
+          <option value="Saúde">Saúde</option>
+          <option value="Estudo">Estudo</option>
+          <option value="Trabalho">Trabalho</option>
+          <option value="Pessoal">Pessoal</option>
+        </select>
+      </label>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="cancelAddBtn">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Salvar hábito</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
