@@ -4,9 +4,9 @@ Um painel kanban para criar, acompanhar e manter hábitos diários — construí
 
 A ideia central é tratar cada hábito como uma planta que cresce ao longo do dia:
 
-- 🌰 **Semente** — o hábito ainda não foi feito hoje
-- 🌿 **Brotando** — está em andamento
-- 🌸 **Florescendo** — foi concluído hoje
+-  **Semente** — o hábito ainda não foi feito hoje
+-  **Brotando** — está em andamento
+-  **Florescendo** — foi concluído hoje
 
 ## ✨ Funcionalidades
 
@@ -36,9 +36,9 @@ habitflow/
 └── README.md
 ```
 
-## ▶️ Como rodar localmente
+## Como rodar 
 
-Não há dependências nem build. Basta abrir o arquivo `index.html` no navegador, ou usar um servidor local simples:
+ Basta abrir o arquivo `index.html` no navegador, ou usar um servidor local simples:
 
 ```bash
 # clone o repositório
@@ -59,10 +59,10 @@ python3 -m http.server 8080
 - **Estado em um único array de objetos** (`habits`), salvo inteiro no `localStorage` a cada alteração — simples de entender e de estender no futuro.
 - **Streak calculado por data:** cada hábito guarda `lastCompletedDate`; a sequência só aumenta uma vez por dia, mesmo que o card seja movido várias vezes.
 
-## 🚀 Possíveis melhorias futuras
+## 🚀 Possíveis melhorias 
 
 - Editar o nome/categoria de um hábito já criado
-- Gráfico simples de histórico de conclusões (ex.: heatmap estilo GitHub)
+- Gráfico simples de histórico de conclusões 
 - Modo escuro
 - Exportar/importar os dados em JSON
 - Migrar a persistência para uma API própria (back-end separado), reaproveitando essa mesma interface
